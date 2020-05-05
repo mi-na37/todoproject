@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">TODOアプリケーション</h1>
+      <p class="lead">一覧表示のページです。</p>
+    </div>
+  </div>
+
+{% endblock header %}
+
+{% block content %}
+
+
+<form action="" method="POST">
+  <div class='container'>
+    <div class="alert alert-primary" role="alert">
+      {{ form.non_field_errors }}
+      {% for field in form %}
+          <div class="form-group">
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.help_text %}
+                  <span class="helptext">{{ field.help_text }}</span>
+              {% endif %}
+              {{ field.errors }}
+          </div>
+      {% endfor %}
+
+      <div class="field">
+          <button type="submit">送信</button>{% csrf_token %}
+      </div>
+    </div>
+  </div>>
+</form>
+
+{% for item in object_list %}
+<div class='container'>
+    <div class="alert alert-{{ item.priority }}" role="alert">
+    <p>{{ item.title }}</p>
+    <p>{{ item.memo }}</p>
+    <button type="button" class="btn btn-primary">詳細</button>
+    <button type="button" class="btn btn-primary">編集</button>
+    <button type="button" class="btn btn-primary">削除</button>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
+
